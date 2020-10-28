@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "556733968064",
+    "firebase_url": "https://task2final.firebaseio.com",
+    "project_id": "task2final",
+    "storage_bucket": "task2final.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556733968064:android:7f5a17ed0859ed00c18725",
+        "android_client_info": {
+          "package_name": "com.ldsilver.task2final"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556733968064-nvlb2efl4f4b2gl4vnnk15kfdubd27rm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCrWUqrz9yxmbija-nXNQb1zBRR6ayqqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556733968064-nvlb2efl4f4b2gl4vnnk15kfdubd27rm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

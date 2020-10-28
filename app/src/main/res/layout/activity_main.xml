@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:orientation="vertical"
+tools:context=".MainActivity">
+
+<TextView
+    android:id="@+id/AppName"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="User Profile"
+    android:textSize="36sp" />
+
+
+    <ImageView
+        android:id="@+id/ProfileImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <EditText
+    android:id="@+id/Name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ems="10"
+    android:hint="Full Name"
+    android:inputType="textPersonName" />
+
+<EditText
+    android:id="@+id/Height"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ems="10"
+    android:hint="Height"
+    android:inputType="textPersonName" />
+
+<EditText
+    android:id="@+id/Weight"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ems="10"
+    android:hint="Current Weight"
+    android:inputType="textPersonName" />
+
+    <EditText
+    android:id="@+id/GoalWeight"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ems="10"
+    android:hint="Goal Weight"
+    android:inputType="textPersonName" />
+
+<EditText
+    android:id="@+id/Calories"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ems="10"
+    android:hint="Recommended Caloric Intake"
+    android:inputType="textPersonName" />
+
+<EditText
+    android:id="@+id/editTextTextEmailAddress"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ems="10"
+    android:hint="Email Address"
+    android:inputType="textEmailAddress" />
+
+    <Button
+        android:id="@+id/buttonLogOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="logout"
+        android:text="Logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.925" />
+
+    <Button
+        android:id="@+id/changeProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Change Profile" />
+
+
+</LinearLayout>
