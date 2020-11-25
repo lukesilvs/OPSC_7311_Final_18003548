@@ -29,28 +29,44 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/Height"
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Measurement Systrem:" />
+
+    <ToggleButton
+        android:id="@+id/toggleUnit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ToggleButton"
+        android:textOff="Metric"
+        android:textOn="Imperial" />
+
+    <EditText
+        android:id="@+id/HeightNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Height"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <EditText
-        android:id="@+id/Weight"
+        android:id="@+id/CurrentWeight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Current Weight"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <EditText
-        android:id="@+id/GoalWeight"
+        android:id="@+id/GoalWeightNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Goal Weight"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/Calories"
@@ -87,4 +103,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Already Registered? Login Here" />
+
 </LinearLayout>

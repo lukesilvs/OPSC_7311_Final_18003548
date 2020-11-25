@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ldsilver.task2final">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,7 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Task2Final">
-        <activity android:name=".EditProfile"></activity>
+        <activity android:name=".UploadImage"></activity>
+        <activity
+            android:name=".MainActivity2"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/Theme.Task2Final.NoActionBar" />
+        <activity android:name=".EditProfile" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Register">

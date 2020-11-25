@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,9 +34,11 @@ public class Register extends AppCompatActivity {
     EditText mEmailAddress, mPassword, mName, mHeight, mWeight, mCalories, mGoalWeight;
     Button mRegister;
     FirebaseAuth fAuth;
-    TextView mLoginButton;
+    TextView mLoginButton, mHeightNumber, mCurrentWeight, mGoalNumber;
     FirebaseFirestore fStore;
     String UserID;
+
+    ToggleButton mToggleUnit;
 
 
     @Override
@@ -42,15 +46,22 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+
         mName= findViewById(R.id.Name);
-        mHeight= findViewById(R.id.Height);
-        mWeight= findViewById(R.id.Weight);
+        //mHeight= findViewById(R.id.Height);
+        //mWeight= findViewById(R.id.Weight);
         mEmailAddress = findViewById(R.id.editTextTextEmailAddress);
         mPassword= findViewById(R.id.editTextTextPassword2);
         mRegister= findViewById(R.id.buttonRegister);
         mLoginButton=findViewById(R.id.textView5);
         mCalories= findViewById(R.id.Calories);
-        mGoalWeight=findViewById(R.id.GoalWeight);
+       // mGoalWeight=findViewById(R.id.GoalWeight);
+
+        mGoalNumber= findViewById(R.id.GoalWeightNumber);
+        mCurrentWeight=findViewById(R.id.CurrentWeight);
+        mHeightNumber= findViewById(R.id.HeightNumber);
+        mToggleUnit=findViewById(R.id.toggleUnit);//new
+
 
 
 
@@ -68,10 +79,38 @@ public class Register extends AppCompatActivity {
                 String email= mEmailAddress.getText().toString().trim();
                 String password= mPassword.getText().toString().trim();
                 String Name=mName.getText().toString();
-                String Height= mHeight.getText().toString(); //probably have to store as int
-                String Weight= mWeight.getText().toString();
+                String Height= mHeightNumber.getText().toString(); //probably have to store as int
+                String Weight= mCurrentWeight.getText().toString();
                 String Calories=mCalories.getText().toString();
-                String GoalWeight= mGoalWeight.getText().toString();
+                String GoalWeight= mGoalNumber.getText().toString();
+                //new
+                Double WeightKgs=1.1;
+                Double WeightPounds=1.1;
+                Double HeightCms=1.1;
+                Double HeightInches=1.1;
+                Double GoalWeightKgs=1.1;
+                Double GoalWeightPounds=1.1;
+                //new
+                if(mToggleUnit.isChecked()){
+
+                    WeightPounds=Double.parseDouble(Weight);
+                    HeightInches=Double.parseDouble(Height);
+                    GoalWeightPounds=Double.parseDouble(GoalWeight);
+                    HeightCms=(HeightInches*2.5);
+                    WeightKgs= (WeightPounds/2.2);
+                    GoalWeightKgs=(GoalWeightPounds/2.2);
+
+                }
+
+                if(!mToggleUnit.isChecked()){
+                    WeightKgs=Double.parseDouble(Weight);
+                    HeightCms=Double.parseDouble(Height);
+                    GoalWeightKgs=Double.parseDouble(GoalWeight);
+                    HeightInches=(HeightCms/2.5);
+                    WeightPounds= (WeightKgs*2.2);
+                    GoalWeightPounds=(GoalWeightKgs*2.2);
+
+                }
 
 
                 //validate
@@ -92,6 +131,21 @@ public class Register extends AppCompatActivity {
                 }
 
                 //Register User in Firebase
+                Integer finalHeightCms = Integer.valueOf(HeightCms.intValue());
+                Integer finalHeightInches = Integer.valueOf(HeightInches.intValue());
+                Integer finalWeightKgs = Integer.valueOf(WeightKgs.intValue());
+                Integer finalWeightPounds = Integer.valueOf(WeightPounds.intValue());
+                Integer finalGoalWeightKgs= Integer.valueOf(GoalWeightKgs.intValue());
+                Integer finalGoalWeightPounds= Integer.valueOf(GoalWeightPounds.intValue());
+
+                String finalHeightCmsString = finalHeightCms.toString();
+                String finalHeightInchesString = finalHeightInches.toString();
+                String finalWeightKgsString = finalWeightKgs.toString();
+                String finalWeightPoundsString = finalWeightPounds.toString();
+                String finalGoalWeightKgsString= finalGoalWeightKgs.toString();
+                String finalGoalWeightPoundsString= finalGoalWeightPounds.toString();
+                String finalHeight=Height.toString();
+
                 fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -101,11 +155,18 @@ public class Register extends AppCompatActivity {
                             UserID= fAuth.getCurrentUser().getUid();
                             DocumentReference documentReference=fStore.collection("users").document(UserID);
                             Map<String,Object> user= new HashMap<>();
+                            //new
                             user.put("Name",Name);
-                            user.put("Height",Height);
+                            user.put("Height",finalHeight);
+                            user.put("HeightCM", finalHeightCmsString);
+                            user.put("HeightInches", finalHeightInchesString);
                             user.put("Weight", Weight);
+                            user.put("WeightKgs", finalWeightKgsString);
+                            user.put("WeightPounds", finalWeightPoundsString);
                             user.put("Email", email);
                             user.put("GoalWeight", GoalWeight);
+                            user.put("GoalWeightKgs", finalGoalWeightKgsString);
+                            user.put("GoalWeightPounds", finalGoalWeightPoundsString);
                             user.put("CaloricIntake", Calories);
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

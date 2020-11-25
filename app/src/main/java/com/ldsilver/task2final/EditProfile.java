@@ -16,13 +16,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -38,6 +42,7 @@ public class EditProfile extends AppCompatActivity {
 
     EditText mEmailAddress,  mName, mHeight, mWeight, mCalories, mGoalWeight;
     Button mSave;
+    ToggleButton mToggleUnit;
     FirebaseAuth fAuth;
     TextView mLoginButton;
     FirebaseFirestore fStore;
@@ -47,10 +52,20 @@ public class EditProfile extends AppCompatActivity {
     StorageReference storageReference;
 
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+
+
+
+
+
+
+
 
 
         Intent data= getIntent();
@@ -60,6 +75,12 @@ public class EditProfile extends AppCompatActivity {
         String GoalWeight= data.getStringExtra("GoalWeight");
         String Height= data.getStringExtra("Height");
         String Weight= data.getStringExtra("Weight");
+        String GoalWeightKg= data.getStringExtra("WeightKgs");
+        String GoalWeightPounds= data.getStringExtra("GoalWeightPounds");
+        String HeightCm= data.getStringExtra("HeightCM");
+        String HeightInches= data.getStringExtra("HeightInches");
+        String WeightKgs= data.getStringExtra("WeightKgs");
+        String WeightPounds= data.getStringExtra("WeightPounds");
 
         fAuth= FirebaseAuth.getInstance();
         fStore= FirebaseFirestore.getInstance();
@@ -75,6 +96,7 @@ public class EditProfile extends AppCompatActivity {
         mCalories= findViewById(R.id.Calories);
         mGoalWeight=findViewById(R.id.GoalWeight);
         mProfileImage=findViewById(R.id.profileImageView);
+        mToggleUnit= findViewById(R.id.toggleButtonUnit2);
 
         StorageReference profileRef= storageReference.child("users/"+fAuth.getCurrentUser().getUid()+"profile.jpg");
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -91,6 +113,43 @@ public class EditProfile extends AppCompatActivity {
                 startActivityForResult(openGalleryIntent,1000);
             }
         });
+
+
+
+        mToggleUnit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+                if(mToggleUnit.isChecked()){
+
+
+
+                    mName.setText(Name);
+                    mEmailAddress.setText(Email);
+                    mCalories.setText("fish");
+                    mGoalWeight.setText(GoalWeightKg);
+                    mHeight.setText(HeightInches);
+                    mWeight.setText(Email);
+
+
+                }
+
+                if(!mToggleUnit.isChecked()){
+                    mName.setText(Name);
+                    mEmailAddress.setText(Email);
+                    mCalories.setText(CaloricIntake);
+                    mGoalWeight.setText(GoalWeightKg);
+                    mHeight.setText(HeightCm);
+                    mWeight.setText(WeightKgs);
+
+
+                }
+            }
+        });
+
+
 
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override
